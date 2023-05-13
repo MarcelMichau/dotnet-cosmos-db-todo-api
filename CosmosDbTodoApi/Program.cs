@@ -2,7 +2,7 @@ using Azure.Identity;
 using CosmosDbTodoApi;
 using Microsoft.EntityFrameworkCore;
 
-var credential = new DefaultAzureCredential();
+var cosmosDbCredential = new DefaultAzureCredential();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +11,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TodoContext>(options =>
     options.UseCosmos(
-        builder.Configuration.GetValue<string>("CosmosDb:AccountEndpoint"),
-        //new DefaultAzureCredential(),
-        //new AzureCliCredential(),
-        credential,
-        //builder.Configuration.GetValue<string>("CosmosDb:AccountKey"),
+        builder.Configuration.GetValue<string>("CosmosDb:AccountEndpoint") ?? throw new InvalidOperationException(),
+        cosmosDbCredential,
         builder.Configuration.GetValue<string>("CosmosDb:DatabaseName")));
 
 var app = builder.Build();
