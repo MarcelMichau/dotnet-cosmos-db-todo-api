@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 
@@ -18,8 +18,9 @@ namespace CosmosTriggerFunction
             ILogger log)
         {
             if (input is not {Count: > 0}) return;
-            log.LogInformation("Documents modified " + input.Count);
-            log.LogInformation("First document Id " + input[0].Id);
+            log.LogInformation("Documents modified: {modifiedCount}", input.Count);
+            log.LogInformation("First document Id: {documentId}", input[0].Id);
+            log.LogInformation("Document Content: {document}", JsonSerializer.Serialize(input));
         }
     }
 
