@@ -13,7 +13,7 @@ builder.Services.AddDbContext<TodoContext>(options =>
     options.UseCosmos(
         builder.Configuration.GetValue<string>("CosmosDb:AccountEndpoint") ?? throw new InvalidOperationException(),
         cosmosDbCredential,
-        builder.Configuration.GetValue<string>("CosmosDb:DatabaseName")));
+        builder.Configuration.GetValue<string>("CosmosDb:DatabaseName") ?? throw new InvalidOperationException()));
 
 var app = builder.Build();
 

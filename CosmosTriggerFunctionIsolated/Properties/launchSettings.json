@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "CosmosTriggerFunctionIsolated": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7272"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 33979,
+      "useSSL": false
+    }
+  }
+}
